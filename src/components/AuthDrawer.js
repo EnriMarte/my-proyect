@@ -17,7 +17,8 @@ export default class AuthDrawer extends Component{
         this.state = {
             logIn : false,
             user: '',
-            error: ''
+            error: '',
+            hola: ''
         }
     }
 

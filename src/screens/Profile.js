@@ -5,7 +5,7 @@ export default function Profile(props){
     return(
         <View style={StyleSheet.container}>
             <Text>Profile</Text>
-            <Text>{props.user}</Text>
+            <Text>{props.nombre}</Text>
 
             <TouchableOpacity
                 onPress={() => props.signOut()}

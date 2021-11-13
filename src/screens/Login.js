@@ -4,37 +4,64 @@ import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native'
 export default class Login extends Component{
     constructor(props){
         super(props)
+        this.state={
+            errorint: ''
+        }
 
     }
     render(){
         return(
             <View style={styles.container}>
+                <Text style={styles.error}>{this.props.error}</Text>
+                <Text style={styles.error}>{this.state.errorint}</Text>
                 <Text style={styles.label}>Login
                 </Text>
                 <Text style={styles.label}>E-Mail</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text)=>this.setState({email: text})}
+                    onChangeText={(text)=>{
+                        this.props.onInputChange()
+                        this.setState({
+                            errorint: '',
+                            email: text
+                        })
+                    }}
                     placeholder='email'
                     keyboardType='email-address'
                     />
                 <Text style={styles.label}>Password</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text)=>this.setState({password: text})}
+                    onChangeText={(text)=>{
+                        this.setState({
+                            errorint: '',
+                            password: text
+                        })
+                    }}
                     placeholder='password'
                     keyboardType='default'
                     secureTextEntry={true}
                 />
-                <Text style={styles.error}>{this.props.errorMessage}</Text>
                 <TouchableOpacity 
-                style={styles.button} 
-                onPress={()=>this.props.ingresar(this.state.email, this.state.password)}>
-                <Text style={styles.textButton}>Log In</Text>    
+                    
+                    style={!(this.state.email && this.state.password)?
+                        styles.buttondis:
+                        styles.button}
+                    disabled= {!(this.state.email && this.state.password)} 
+                    onPress={()=>{
+                        if(this.state.email && this.state.password){
+                            this.props.ingresar(this.state.email, this.state.password)
+                        }else{
+                            this.setState({
+                                errorint: 'Porfavor completa los datos'
+                            })
+                        }
+                    }
+                }>
+                <Text style={styles.textButton}>Log In</Text>                  
                 </TouchableOpacity>
             </View>
         )
-    
     }
 
 }
@@ -68,9 +95,21 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderStyle: 'solid',
         borderColor: '#28a745'
+    },    
+    buttondis:{
+        backgroundColor:'grey',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: 'grey'
     },
     textButton:{
         color: '#fff'
+    },
+    error:{
+        color: 'red'
     }
-
 })

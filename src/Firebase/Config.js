@@ -10,8 +10,12 @@ const firebaseConfig = {
   appId: "1:374503087084:web:1c6e169598476abe7fbec9",
   measurementId: "G-ERJS7D9TPX"
 };
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}else {
+  firebase.app(); // if already initialized, use that one
+}
 
-app.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const db = app.firestore();

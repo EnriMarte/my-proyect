@@ -7,6 +7,7 @@ import Login from '../screens/Login';
 import Register from '../screens/Register';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
+import CrearPost from '../screens/CrearPost';
 
 
 const Drawer = createDrawerNavigator();
@@ -16,10 +17,10 @@ export default class AuthDrawer extends Component{
         super(props);
         this.state = {
             logIn : false,
+            email: '',
             user: '',
-            error: '',
-            hola: ''
-        }
+            error: ''
+            }
     }
 
     componentDidMount(){
@@ -37,28 +38,48 @@ export default class AuthDrawer extends Component{
             }
         })
     }
-    registrarse(email, password){
+    registrarse(email, password, username){
         auth.createUserWithEmailAndPassword(email, password)
         .then(response => {
+            console.log(username);
             console.log(response);
-            this.setState({logIn: true})
-            this.setState({user: response.user.email})
+            response.user.updateProfile({
+                displayName: username
+            })
+            this.setState({
+                logIn: true,
+                user: username,
+                email: response.user.email
+            })
         })
         .catch(error => {
-            console.log(error);
-            this.setState({logIn: false})
+            this.setState({
+                error: "Datos incorrectos",
+                logIn: false
+            })
         })
     }
     ingresar(email, password){
-        auth.signInWithEmailAndPassword(email, password)
-        .then(response => {
-            console.log(response);
-            this.setState({logIn: true})
-            this.setState({user: response.user.email})
-        })
-        .catch(error => {
-            console.log(error);
-            this.setState({logIn: false})
+            auth.signInWithEmailAndPassword(email, password)
+            .then(response => {
+                console.log(response);
+
+                this.setState({
+                    logIn: true,
+                    user: response.user.displayName
+                })
+                console.log('s'+user);
+            })
+            .catch(error => {
+                this.setState({
+                    logIn: false,
+                    error: "Credenciales incorrectas"
+                })
+            })
+    }
+    onInputChange(){
+        this.setState({
+            error: ''
         })
     }
     signOut(){
@@ -66,7 +87,8 @@ export default class AuthDrawer extends Component{
         .then(response => {
             this.setState({
                 logIn: false,
-                user: ''
+                user: '',
+                error: ''
             });
         })
         .catch(error => {
@@ -86,17 +108,29 @@ export default class AuthDrawer extends Component{
                                     {() => <Home />}
                                 </Drawer.Screen>
                                 <Drawer.Screen name="Perfil">
-                                    {() => <Profile user={this.state.user}
+                                    {() => <Profile 
+                                    nombre={this.state.user}
                                     signOut={() => this.signOut()} />}
+                                </Drawer.Screen>
+                                <Drawer.Screen name="Postear">
+                                {() => <CrearPost />}
                                 </Drawer.Screen>
                             </React.Fragment>
                         :
                             <React.Fragment>
                                 <Drawer.Screen name="Login">
-                                    {() => <Login ingresar = {(email, password)=> this.ingresar(email, password)}/>}
+                                    {() => <Login ingresar = {
+                                    (email, password)=> this.ingresar(email, password)} 
+                                    error = {this.state.error} 
+                                    onInputChange={() => this.onInputChange()}
+                                    />}
                                 </Drawer.Screen>
                                 <Drawer.Screen name="Register">
-                                    {() => <Register registrar = {(email, password)=> this.registrarse(email, password)}/>}
+                                    {() => <Register registrar = {
+                                    (email, password, username)=> this.registrarse(email, password, username)} 
+                                    error = {this.state.error}
+                                    onInputChange={() => this.onInputChange()}
+                                    />}
                                 </Drawer.Screen>
                             </React.Fragment>
                     }

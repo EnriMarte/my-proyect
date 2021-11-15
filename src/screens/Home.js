@@ -1,23 +1,73 @@
 import React, {Component} from 'React'
-import {View, StyleSheet} from 'react-native'
+import {View, StyleSheet, Text, FlatList, TouchableOpacity, ActivityIndicator, Image} from 'react-native'
+import Megusta from '../components/Megusta'
+import Posteos from '../components/Posteos'
+import { db} from "../firebase/config";
+
 
 export default class Home extends Component{
     constructor(props){
-        super(props)
+        super(props);
+        this.state = {
+            posteos: [],    
+            carga: true     
+        }
+    }
+    componentDidMount(){
+        console.log("asd");
+        db.collection('posts').orderBy('createdAt', 'desc').onSnapshot( docs => {
+            let posts=[];
+            docs.forEach(doc => {
+                console.log(doc)
+                posts.push({
+                    id: doc.id,
+                    data: doc.data()
+                }) 
+            })
+            
+            console.log(posts);
 
+            this.setState({
+                posteos: posts,    
+                carga: false   
+            })
+        })
     }
     render(){
         return(
             <View style={styles.container}>
-
+                {   this.state.carga ?
+                    <ActivityIndicator size='large' color='teal'/> :
+                    <View>
+                        <FlatList
+                            data={this.state.posteos}
+                            renderItem={ ({item})=><Posteos doc={item}/>}
+                        />
+                    </View>
+                }  
+                <TouchableOpacity style={styles.touchable}>
+                    <Text style={styles.touchableText}>Clickeame</Text>
+                </TouchableOpacity>
+                <Megusta/>
                 
             </View>
         )
-    
     }
-
 }
 
 const styles = StyleSheet.create({
-    container : {}
+    container : {
+        padding: '4%',
+    },
+    content: {
+        alignItems: 'center',
+        marginTop: 50,
+        marginBottom: 40
+      },
+      box: {
+        width: 100,
+        height: 100,
+        backgroundColor: '#333',
+        marginBottom: 10
+      } 
 })

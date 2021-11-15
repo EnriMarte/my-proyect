@@ -1,5 +1,5 @@
 import React, {Component} from 'React'
-import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native'
+import {View, StyleSheet, Text, TextInput, TouchableOpacity, Image} from 'react-native'
 
 export default class Login extends Component{
     constructor(props){
@@ -12,13 +12,13 @@ export default class Login extends Component{
     render(){
         return(
             <View style={styles.container}>
+                <Image style={styles.image} source={{uri: "https://i.ibb.co/JK3Wb2f/Kiwi.png",}}/> 
                 <Text style={styles.error}>{this.props.error}</Text>
                 <Text style={styles.error}>{this.state.errorint}</Text>
-                <Text style={styles.label}>Login
-                </Text>
-                <Text style={styles.label}>E-Mail</Text>
+            <View style={styles.input}>
+
                 <TextInput
-                    style={styles.input}
+                    style={styles.TextInput}
                     onChangeText={(text)=>{
                         this.props.onInputChange()
                         this.setState({
@@ -26,27 +26,30 @@ export default class Login extends Component{
                             email: text
                         })
                     }}
-                    placeholder='email'
+                    placeholder='Email'
                     keyboardType='email-address'
                     />
-                <Text style={styles.label}>Password</Text>
+            </View>
+             <View style={styles.input}>
                 <TextInput
-                    style={styles.input}
+                    style={styles.TextInput}
                     onChangeText={(text)=>{
+                        this.props.onInputChange()
                         this.setState({
                             errorint: '',
                             password: text
                         })
                     }}
-                    placeholder='password'
+                    placeholder ='Password'
                     keyboardType='default'
                     secureTextEntry={true}
                 />
+            </View>
                 <TouchableOpacity 
                     
                     style={!(this.state.email && this.state.password)?
-                        styles.buttondis:
-                        styles.button}
+                        styles.disLoginBtn:
+                        styles.loginBtn}
                     disabled= {!(this.state.email && this.state.password)} 
                     onPress={()=>{
                         if(this.state.email && this.state.password){
@@ -57,8 +60,11 @@ export default class Login extends Component{
                             })
                         }
                     }
-                }>
-                <Text style={styles.textButton}>Log In</Text>                  
+                }>    
+                <Text>
+                    Log In
+                </Text >
+
                 </TouchableOpacity>
             </View>
         )
@@ -67,49 +73,55 @@ export default class Login extends Component{
 }
 
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
-    },
-    input:{
-        height:20,
-        paddingVertical:15,
-        paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical:10,
-    },
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      input: {
+        backgroundColor: "#78CB43",
+        borderRadius: 30,
+        width: "70%",
+        height: 45,
+        marginBottom: 20,
+        alignItems: "center",
+      },
     error:{
         marginBottom: 10,
         color: "#dc3545",
         fontSize: 12
     },
-    button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745'
-    },    
-    buttondis:{
-        backgroundColor:'grey',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: 'grey'
-    },
-    textButton:{
-        color: '#fff'
-    },
+    TextInput: {
+        height: 50,
+        flex: 1,
+        padding: 10,
+        marginLeft: 20,
+      },
+      loginBtn: {
+        width: "80%",
+        borderRadius: 25,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "#89653A",
+      },
+      disLoginBtn: {
+        width: "80%",
+        borderRadius: 25,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "grey",
+      },
     error:{
         color: 'red'
-    }
+    },
+    image: {
+        height: "25%",
+        marginBottom: 40,
+        width: "60%",
+      },
 })

@@ -113,7 +113,7 @@ export default class AuthDrawer extends Component{
                                     signOut={() => this.signOut()} />}
                                 </Drawer.Screen>
                                 <Drawer.Screen name="Postear">
-                                {() => <CrearPost />}
+                                {(drawerProps) => <CrearPost drawerProps={drawerProps}/>}
                                 </Drawer.Screen>
                             </React.Fragment>
                         :

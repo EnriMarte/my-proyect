@@ -86,18 +86,19 @@ class MiCamara extends Component{
                         </TouchableOpacity>                        
                     </React.Fragment> 
                     :   
-                    <React.Fragment>
+                    <React.Fragment >
                         <Camera 
                             style = { styles.camara}   //Aplicando los estilos a la cámara
                             type = {Camera.Constants.front}   //Seleccionando la cámara front - back
                             ref = {reference => this.camara = reference} //A la variable camara se le referencia el componente, es como un document.querySelector()
                         />
-                        <TouchableOpacity onPress= { () => this.sacarFoto()}>
-                            <Text style={styles.btn}>Sacar Foto</Text>
-                        </TouchableOpacity>
                     </React.Fragment>    
                 }
+                    <TouchableOpacity style={styles.btnn} onPress= { () => this.sacarFoto()}>
+                            <Text style={styles.btn}>Sacar Foto</Text>
+                    </TouchableOpacity>
                 
+
             </React.Fragment>
         )
     }
@@ -106,12 +107,18 @@ class MiCamara extends Component{
 const styles = StyleSheet.create({
     camara : {
         flex: 1,
-        width: '100%'
+        width: '88%',
+        marginLeft: '6%',
+        marginBottom: '4%',
     },
     btn: {
         backgroundColor: 'tomato',
-        padding: '10',
-        color: 'white'
+        padding: '18',
+        color: 'white',
+        justifyContent: "center",
+    },
+    btnn: {
+        padding: '6%'
     },
     vistaPrevia:{
         flex:6,        //Esto se lo coloque para que me ocupe 1/8 de la pantalla - Sumo:  Flex 6 + flex 1

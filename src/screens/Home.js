@@ -58,6 +58,7 @@ export default class Home extends Component{
 const styles = StyleSheet.create({
     container : {
         padding: '4%',
+        backgroundColor: 'white'
     },
     content: {
         alignItems: 'center',

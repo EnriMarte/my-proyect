@@ -11,20 +11,20 @@ class Register extends Component{
             errorint: ''
         }
     }
- 
+
 
     render(){
         return(
             <View style={styles.container}>
-                <Image style={styles.image} source={{uri: "https://i.ibb.co/PhKkxWG/Disen-o-sin-ti-tulo.png",}}/> 
-                <Text>Register</Text>
+                <Image style={styles.image} source={{uri: "https://i.ibb.co/QFt66f1/carbon.png",}}/> 
+                <Text style={styles.registrar} >Register</Text>
                 <Text style={styles.error}>{this.props.error}</Text>
                 <Text style={styles.error}>{this.state.errorint}</Text>
                 <View style={styles.input}>
                 <TextInput
                     style={styles.TextInput}
                     onChangeText={(text)=>this.setState({email: text})}
-                    placeholder='email'
+                    placeholder='Email'
                     keyboardType='email-address'
                     />
                 </View>
@@ -32,7 +32,7 @@ class Register extends Component{
                 <TextInput
                     style={styles.TextInput}
                     onChangeText={(text)=>this.setState({password: text})}
-                    placeholder='password'
+                    placeholder='Password'
                     keyboardType='default'
                     secureTextEntry={true}
                 />
@@ -117,10 +117,16 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
     image: {
-        height: "5%",
+        height: "8%",
         marginBottom: 20,
-        width: "40%",
-      }
+        width: "66%",
+      },
+    registrar: {
+        color: '#89653A',
+        fontWeight: 'bold',
+        fontFamily: 'monospace',
+        fontSize: 'large',
+    },
 
 })
 

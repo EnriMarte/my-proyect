@@ -13,12 +13,12 @@ export default class Posteos extends Component {
         }
     }
     componentDidMount(){
-        if(this.props.doc.data.likes){
-            let likes = this.props.doc.data.likes.length;
+        if(this.props.doc.data.meGusta){
+            let likes = this.props.doc.data.meGusta.length;
             this.setState({
                 meGusta: likes,
             })
-            if (this.props.doc.data.likes.includes(auth.currentUser.email)) {
+            if (this.props.doc.data.meGusta.includes(auth.currentUser.email)) {
                 this.setState({
                     meGustaron: true,
                 })  
@@ -59,8 +59,8 @@ export default class Posteos extends Component {
     render(){  
         return(
             <View style={styles.card}>
+                <Text style={styles.name}>{this.props.doc.data.username}</Text>
                 <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
-                <Text style={styles.name}>Posteo creado por: {this.props.doc.data.username}</Text>
                 <Text style={styles.name}>Título:  {this.props.doc.data.title}</Text>
                 <Text style={styles.price}>Descripción:  {this.props.doc.data.description}</Text>
                     { this.state.meGustaron === true ?

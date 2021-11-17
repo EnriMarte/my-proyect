@@ -1,6 +1,5 @@
 import React, {Component} from 'React'
 import {View, StyleSheet, Text, FlatList, TouchableOpacity, ActivityIndicator, Image} from 'react-native'
-import Megusta from '../components/Megusta'
 import Posteos from '../components/Posteos'
 import { db} from "../firebase/config";
 
@@ -45,11 +44,6 @@ export default class Home extends Component{
                         />
                     </View>
                 }  
-                <TouchableOpacity style={styles.touchable}>
-                    <Text style={styles.touchableText}>Clickeame</Text>
-                </TouchableOpacity>
-                <Megusta/>
-                
             </View>
         )
     }

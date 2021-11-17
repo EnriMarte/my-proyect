@@ -8,6 +8,7 @@ import Register from '../screens/Register';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
 import CrearPost from '../screens/CrearPost';
+import Search from '../screens/Search';
 
 
 const Drawer = createDrawerNavigator();
@@ -114,6 +115,9 @@ export default class AuthDrawer extends Component{
                                 </Drawer.Screen>
                                 <Drawer.Screen name="Postear">
                                 {(drawerProps) => <CrearPost drawerProps={drawerProps}/>}
+                                </Drawer.Screen>
+                                <Drawer.Screen name="Search">
+                                    {() => <Search />}
                                 </Drawer.Screen>
                             </React.Fragment>
                         :

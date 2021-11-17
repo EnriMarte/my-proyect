@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 class Register extends Component{
     constructor(props){
@@ -11,39 +11,45 @@ class Register extends Component{
             errorint: ''
         }
     }
-    
+ 
 
     render(){
         return(
-            <View style={styles.formContainer}>
+            <View style={styles.container}>
+                <Image style={styles.image} source={{uri: "https://i.ibb.co/PhKkxWG/Disen-o-sin-ti-tulo.png",}}/> 
                 <Text>Register</Text>
                 <Text style={styles.error}>{this.props.error}</Text>
                 <Text style={styles.error}>{this.state.errorint}</Text>
-
+                <View style={styles.input}>
                 <TextInput
-                    style={styles.input}
+                    style={styles.TextInput}
                     onChangeText={(text)=>this.setState({email: text})}
                     placeholder='email'
                     keyboardType='email-address'
                     />
+                </View>
+                <View style={styles.input}>
                 <TextInput
-                    style={styles.input}
+                    style={styles.TextInput}
                     onChangeText={(text)=>this.setState({password: text})}
                     placeholder='password'
                     keyboardType='default'
                     secureTextEntry={true}
                 />
+                </View>
+                <View style={styles.input}>
                 <TextInput
-                    style ={styles.input}
+                    style ={styles.TextInput}
                     placeholder = 'Introduzca su nombre'
                     keyboardType = 'default'
                     onChangeText = { (text) => this.setState({userName: text})} 
                 />
+                </View>
                 <TouchableOpacity 
                     
                     style={!(this.state.email && this.state.password && this.state.userName)?
-                        styles.buttondis:
-                        styles.button}
+                        styles.disLoginBtn:
+                        styles.loginBtn}
                     disabled= {!(this.state.email && this.state.password && this.state.userName)} 
                     onPress={()=>{
                         
@@ -64,48 +70,57 @@ class Register extends Component{
 }
 
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
-    },
-    input:{
-        height:20,
-        paddingVertical:15,
-        paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical:10,
-    },
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+    input: {
+        backgroundColor: "#78CB43",
+        borderRadius: 30,
+        width: "70%",
+        height: 45,
+        marginBottom: 20,
+        alignItems: "center",
+      },
+      TextInput: {
+        height: 50,
+        flex: 1,
+        padding: 10,
+        marginLeft: 20,
+      },
     error:{
         marginBottom: 10,
         color: "#dc3545",
         fontSize: 12
     },
-    button:{
-        backgroundColor:'#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745'
-    },
-    buttondis:{
-        backgroundColor:'grey',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: 'grey'
-    },
+    loginBtn: {
+        width: "80%",
+        borderRadius: 25,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "#89653A",
+      },
+      disLoginBtn: {
+        width: "80%",
+        borderRadius: 25,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "grey",
+      },
     textButton:{
         color: '#fff'
-    }
+    },
+    image: {
+        height: "5%",
+        marginBottom: 20,
+        width: "40%",
+      }
 
 })
 

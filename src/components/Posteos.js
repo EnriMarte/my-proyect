@@ -93,13 +93,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: '80px',
     marginLeft: '69%',
-    marginRight: '5%'
+    marginRight: '5%',
+    opacity: '50%',
   },
   meGusta: {
     backgroundColor: 'white',
     height: '80px',
     marginLeft: '69%',
-    marginRight: '5%'
+    marginRight: '5%',
   },
   image: {
       width: '54%',

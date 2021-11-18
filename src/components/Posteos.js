@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
-
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default class Posteos extends Component {
     constructor(props){
@@ -59,19 +59,19 @@ export default class Posteos extends Component {
     render(){  
         return(
             <View style={styles.card}>
+            <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
                 <Text style={styles.name}>{this.props.doc.data.username}</Text>
-                <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
-                <Text style={styles.name}>Título:  {this.props.doc.data.title}</Text>
-                <Text style={styles.price}>Descripción:  {this.props.doc.data.description}</Text>
+                <Text style={styles.desc}>Título:  {this.props.doc.data.title}</Text>
+                <Text style={styles.desc}>Descripción:  {this.props.doc.data.description}</Text>
                     { this.state.meGustaron === true ?
                         <TouchableOpacity  style={styles.quitarLike} onPress={()=>this.unLike()}>
-                            <Text style={styles.texto} >Quitar like</Text>
+                        <Image style={styles.image} source={{uri: "https://i.postimg.cc/y6gnWK7m/logon.png",}}/> 
                         </TouchableOpacity> :
                         <TouchableOpacity  style={styles.meGusta}  onPress={()=>this.like()}>
-                            <Text style={styles.texto} >Me gusta</Text>
+                        <Image style={styles.image} source={{uri: "https://i.postimg.cc/Kzj2DW8y/este.png",}}/> 
                         </TouchableOpacity>
                     }
-                    <Text>likes: {this.state.meGusta}</Text>
+                    <Text>Likes: {this.state.meGusta}</Text>
                 </View>
                 
         )
@@ -90,29 +90,24 @@ const styles = StyleSheet.create({
 //         borderRadius: 5,   
 //     },
     quitarLike: {
-      backgroundColor: 'tomato',
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      textAlign: 'center',
-      borderRadius: 4,
-      borderWidth: 1,
-      borderRadius: 'inherit',
-      marginLeft: '69%',
-      marginRight: '5%'
-  },
-  meGusta: {
-    backgroundColor: 'green',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    textAlign: 'center',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderRadius: 'inherit',
+    backgroundColor: 'white',
+    height: '80px',
     marginLeft: '69%',
     marginRight: '5%'
   },
+  meGusta: {
+    backgroundColor: 'white',
+    height: '80px',
+    marginLeft: '69%',
+    marginRight: '5%'
+  },
+  image: {
+      width: '54%',
+      height: '60%',
+      marginLeft: '40%',
+  },
   texto:{
-    color: 'white'
+    color: 'black'
   },
   card: {
     backgroundColor: 'white',
@@ -139,10 +134,9 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 22,
     fontWeight: 'bold',
+    alignSelf: 'center'
   },
-  price: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
+  desc: {
+        fontSize: 22,
+  }
 })

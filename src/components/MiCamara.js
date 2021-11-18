@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity,FloatList, Image, ActivityIndicator } from 'react-native';
 import {Camera} from 'expo-camera';
 import { storage } from '../firebase/config'; 
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 class MiCamara extends Component{
@@ -95,7 +96,13 @@ class MiCamara extends Component{
                     </React.Fragment>    
                 }
                     <TouchableOpacity style={styles.btnn} onPress= { () => this.sacarFoto()}>
-                            <Text style={styles.btn}>Sacar Foto</Text>
+                        <LinearGradient
+                    colors={['#7E4B2A', '#78CB43']}
+                    start={{x: 0, y: 0.5}}
+                    end={{x: 1, y: 1}}
+                        >                        
+                            <Text >Sacar Foto</Text>
+                        </LinearGradient>
                     </TouchableOpacity>
                 
 
@@ -126,15 +133,19 @@ const styles = StyleSheet.create({
     },
     btnRechazar:{
         flex: 1,     //Este ocuparía 1/7 de la pantalla
-        width: '100%',
+        width: '30%',
         backgroundColor: 'teal',
-        color: 'white'
+        color: 'white',
+        marginTop: '2%',
+        marginLeft: '5%'
     },
     btnAceptar:{
         flex: 1,     //Este ocuparía 1/7 de la pantalla
-        width: '100%',
+        width: '30%',
         backgroundColor: 'tomato',
-        color: 'white'
+        color: 'white',
+        marginTop: '2%',
+        marginLeft: '5%'
     },
     mensaje:{
         backgroundColor: 'tomato',

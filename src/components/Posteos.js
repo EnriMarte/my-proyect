@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, Button } from 'react-native';
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
-import { LinearGradient } from 'expo-linear-gradient';
+
 
 export default class Posteos extends Component {
     constructor(props){
@@ -10,6 +10,7 @@ export default class Posteos extends Component {
         this.state = {
            meGusta: 0,
            meGustaron: false,
+           showModal: false,
         }
     }
     componentDidMount(){
@@ -42,7 +43,7 @@ export default class Posteos extends Component {
     }
     unLike(){
         let thisDoc = db.collection('posts').doc(this.props.doc.id);
-
+            // thisDoc.delete()
         thisDoc.update(
             { meGusta: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)}
         )
@@ -55,8 +56,21 @@ export default class Posteos extends Component {
             )
         .catch(error => console.log('Upss error encontrado '+error))
     }
+    comentar(){
+       this.setState({
+           showModal: true
+       })
+    }
+    descomentar(){
+        this.setState({
+            showModal: false
+        })
+    }
+
+
 
     render(){  
+
         return(
             <View style={styles.card}>
             <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
@@ -72,6 +86,18 @@ export default class Posteos extends Component {
                         </TouchableOpacity>
                     }
                     <Text>Likes: {this.state.meGusta}</Text>
+                
+                <TouchableOpacity style={styles.insta} onPress={()=>this.comentar()}>
+                
+                {this.state.showModal ?
+                <Modal visible={this.state.showModal}
+                animationType= 'fade'
+                transparent={false}>
+                <TouchableOpacity style={styles.insta} onPress={()=>this.descomentar()}> </TouchableOpacity>
+                </Modal>:
+                <Text></Text>
+                }
+                </TouchableOpacity> 
                 </View>
                 
         )
@@ -138,5 +164,13 @@ const styles = StyleSheet.create({
   },
   desc: {
         fontSize: 22,
-  }
+  },
+  insta: {
+    backgroundColor: "#78CB43",
+    borderRadius: 30,
+    width: "70%",
+    height: 45,
+    marginBottom: 20,
+    alignItems: "center",
+  },
 })

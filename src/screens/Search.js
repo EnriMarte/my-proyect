@@ -1,4 +1,4 @@
-import React, {Component} from 'React'
+import React, {Component} from 'react'
 import {View, StyleSheet, TextInput, FlatList, TouchableOpacity, ActivityIndicator, Image} from 'react-native'
 import Perfil from '../components/Perfil'
 import { db} from "../firebase/config";

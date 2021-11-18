@@ -13,7 +13,7 @@ export default class Profile extends Component{
 
     }
     componentDidMount(){
-        db.collection('posts').where('username', '==', this.props.nombre).onSnapshot( docs => {
+        db.collection('posts').where('username', '==', this.props.nombre).orderBy('createdAt', 'desc').onSnapshot( docs => {
             let posts=[];
             docs.forEach(doc => {
                 console.log(doc)

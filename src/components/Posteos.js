@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { View, Text,TextInput, StyleSheet, TouchableOpacity, Image, Modal, Button } from 'react-native';
+import { View, Text,TextInput, StyleSheet, TouchableOpacity, Image, Modal, FlatList } from 'react-native';
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
-
+import Comentarios from "./Comentarios";
 
 export default class Posteos extends Component {
     constructor(props){
@@ -122,6 +122,14 @@ export default class Posteos extends Component {
                 <Modal visible={this.state.showModal}
                 animationType= 'fade'
                 transparent={false}>
+                    {this.props.doc.data.comments.length == 0 ?
+                    <Text>Aun no hay comentarios</Text>:
+                    null
+                    }
+                     <FlatList
+                            data={this.props.doc.data.comments}
+                            renderItem={ ({item})=><Comentarios doc={item}/>}
+                    />
                     <TextInput
                     style={styles.TextInput}
                     onChangeText={(text)=>this.setState({comentario: text})}

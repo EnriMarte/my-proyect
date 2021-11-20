@@ -13,11 +13,9 @@ export default class Home extends Component{
         }
     }
     search(text){
-        console.log("mocz");
         db.collection('posts').where('username', '==', text).onSnapshot( docs => {
             let perfil=[];
             docs.forEach(doc => {
-                console.log(doc)
                 perfil.push({
                     id: doc.id,
                     data: doc.data()
@@ -40,8 +38,6 @@ export default class Home extends Component{
                  <TextInput
                     style={styles.TextInput}
                     onChangeText={(text)=>{
-                        console.log(text);
-                        console.log(this.search(text))
                         this.setState({
                             errorint: ''
                         })

@@ -44,7 +44,6 @@ export default class Posteos extends Component {
     }
     unLike(){
         let thisDoc = db.collection('posts').doc(this.props.doc.id);
-            // thisDoc.delete()
         thisDoc.update(
             { meGusta: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)}
         )
@@ -82,7 +81,7 @@ export default class Posteos extends Component {
       
         thisDoc.update(
             { comments: firebase.firestore.FieldValue.arrayUnion({
-                creador: auth.currentUser.email,
+                creador: auth.currentUser.displayName,
                 comentario: this.state.comentario
             })}
         )
@@ -170,17 +169,6 @@ export default class Posteos extends Component {
     }
 }
 const styles = StyleSheet.create({
-//     container: {
-//         marginVertical: 15,
-//         shadowColor: '#ccc',
-//         shadowOffset:{
-//             width: 0,
-//             height: 0
-//         },
-//         shadowOpacity: 0.5,
-//         shadowRadius: 10,
-//         borderRadius: 5,   
-//     },
     quitarLike: {
     backgroundColor: 'white',
     height: '80px',

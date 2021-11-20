@@ -23,17 +23,6 @@ export default class Perfil extends Component {
     }
 }
 const styles = StyleSheet.create({
-//     container: {
-//         marginVertical: 15,
-//         shadowColor: '#ccc',
-//         shadowOffset:{
-//             width: 0,
-//             height: 0
-//         },
-//         shadowOpacity: 0.5,
-//         shadowRadius: 10,
-//         borderRadius: 5,   
-//     },
   texto:{
     color: 'white'
   },

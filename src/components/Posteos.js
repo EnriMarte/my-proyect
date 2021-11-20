@@ -11,6 +11,7 @@ export default class Posteos extends Component {
            meGusta: 0,
            meGustaron: false,
            showModal: false,
+           showModalDelete: false,
            comentario: ''
         }
     }
@@ -66,6 +67,16 @@ export default class Posteos extends Component {
             showModal: false
         })
     }
+    mostrarModalDelete(){
+        this.setState({
+            showModalDelete: true
+        })
+     }
+     desmostrarModalDelete(){
+         this.setState({
+             showModalDelete: false
+         })
+     }
     comentar(){        
         let thisDoc = db.collection('posts').doc(this.props.doc.id);
       
@@ -91,13 +102,6 @@ export default class Posteos extends Component {
 
         return(
             <View style={styles.card}>
-            {this.props.doc.data.username == auth.currentUser.displayName && this.props.borrar ?
-            <TouchableOpacity style={styles.meGusta} onPress={() => this.props.borrar(this.props.doc.id)}>
-                  <Text>Borrar</Text>
-            </TouchableOpacity>:
-            null
-            }
-            
             <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
                 <Text style={styles.name}>{this.props.doc.data.username}</Text>
                 <Text style={styles.desc}>Título:  {this.props.doc.data.title}</Text>
@@ -131,6 +135,23 @@ export default class Posteos extends Component {
                 <Text></Text>
                 }
                 </TouchableOpacity> 
+                {this.props.doc.data.username == auth.currentUser.displayName && this.props.borrar ?
+                    <TouchableOpacity style={styles.insta} onPress={()=>this.mostrarModalDelete()}>
+                    {this.state.showModalDelete ?
+                        <Modal visible={this.state.showModalDelete}
+                        animationType= 'fade'
+                        transparent={false}>
+            
+                        <TouchableOpacity style={styles.meGusta} onPress={() => this.props.borrar(this.props.doc.id)}>
+                            <Text>Borrar</Text>
+                        </TouchableOpacity>   
+                            <TouchableOpacity style={styles.insta} onPress={()=>this.desmostrarModalDelete()}> Cerrar</TouchableOpacity>               
+                        </Modal>:
+                            <Text></Text>
+                    }
+                    </TouchableOpacity>:
+                        null
+                }
                 </View>
                 
         )

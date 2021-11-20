@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
 import Posteos from '../components/Posteos'
 import {db} from "../firebase/config";
 
@@ -41,16 +41,16 @@ export default class Profile extends Component{
     }
     render(){
         return(
-            <View style={StyleSheet.container}>
-                <Text>Profile</Text>
+            <View style={styles.container}>
                 <Text>{this.props.nombre}</Text>
 
-                <TouchableOpacity
+                <TouchableOpacity style={styles.quitarLike}
                     onPress={() => this.props.signOut()}
                 >
-                    <Text>Cerrar Sesion</Text>
+                    <Image style={styles.image} source={{uri: "https://www.kindpng.com/picc/m/19-194798_transparent-logout-png-sign-out-icon-transparent-png.png",}}/> 
+                    {/* <Text>Cerrar Sesion</Text> */}
                 </TouchableOpacity>
-                <FlatList
+                <FlatList style={styles.card}
                     data={this.state.posteosUser}
                     renderItem={ ({item})=><Posteos doc={item} borrar={(id) => this.borrarPost(id)}/>}
                 />
@@ -59,3 +59,23 @@ export default class Profile extends Component{
         )
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: '4%',
+      },
+      image: {
+        width: '100%',
+        height: '80%',
+    },
+    quitarLike: {
+        backgroundColor: 'white',
+        height: '80px',
+        marginLeft: '69%',
+        marginRight: '5%',
+        opacity: '50%',
+      },
+})

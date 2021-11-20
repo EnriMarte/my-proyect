@@ -28,6 +28,17 @@ export default class Profile extends Component{
             })
         })
     }
+    borrarPost(id){
+        let thisDoc = db.collection('posts').doc(id);
+        thisDoc.delete()
+        
+        let postNuevos = this.state.posteosUser.filter((post) => post.id != id)
+        this.setState({
+            posteosUser: postNuevos
+        })
+
+        
+    }
     render(){
         return(
             <View style={StyleSheet.container}>
@@ -41,7 +52,7 @@ export default class Profile extends Component{
                 </TouchableOpacity>
                 <FlatList
                     data={this.state.posteosUser}
-                    renderItem={ ({item})=><Posteos doc={item}/>}
+                    renderItem={ ({item})=><Posteos doc={item} borrar={(id) => this.borrarPost(id)}/>}
                 />
 
             </View>

@@ -11,7 +11,7 @@ export default class Posteos extends Component {
            meGusta: 0,
            meGustaron: false,
            showModal: false,
-           comentario: '',
+           comentario: ''
         }
     }
     componentDidMount(){
@@ -68,9 +68,12 @@ export default class Posteos extends Component {
     }
     comentar(){        
         let thisDoc = db.collection('posts').doc(this.props.doc.id);
-
+      
         thisDoc.update(
-            { comments: firebase.firestore.FieldValue.arrayUnion(this.state.comentario)}
+            { comments: firebase.firestore.FieldValue.arrayUnion({
+                creador: auth.currentUser.email,
+                comentario: this.state.comentario
+            })}
         )
         .then(
             this.setState({
@@ -88,6 +91,13 @@ export default class Posteos extends Component {
 
         return(
             <View style={styles.card}>
+            {this.props.doc.data.username == auth.currentUser.displayName && this.props.borrar ?
+            <TouchableOpacity style={styles.meGusta} onPress={() => this.props.borrar(this.props.doc.id)}>
+                  <Text>Borrar</Text>
+            </TouchableOpacity>:
+            null
+            }
+            
             <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
                 <Text style={styles.name}>{this.props.doc.data.username}</Text>
                 <Text style={styles.desc}>Título:  {this.props.doc.data.title}</Text>
@@ -113,6 +123,7 @@ export default class Posteos extends Component {
                     onChangeText={(text)=>this.setState({comentario: text})}
                     placeholder='Que bien te ves pana rabbit...'
                     keyboardType='text'
+                    value={this.state.comentario}
                     />
                     <TouchableOpacity style={styles.insta} onPress={()=>this.comentar()}> Comentar</TouchableOpacity>
                     <TouchableOpacity style={styles.insta} onPress={()=>this.desmostrarModal()}> Cerrar</TouchableOpacity>

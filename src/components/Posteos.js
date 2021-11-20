@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, Modal, Button } from 'react-native';
+import { View, Text,TextInput, StyleSheet, TouchableOpacity, Image, Modal, Button } from 'react-native';
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
 
@@ -11,6 +11,7 @@ export default class Posteos extends Component {
            meGusta: 0,
            meGustaron: false,
            showModal: false,
+           comentario: '',
         }
     }
     componentDidMount(){
@@ -28,7 +29,6 @@ export default class Posteos extends Component {
     } 
     like(){        
         let thisDoc = db.collection('posts').doc(this.props.doc.id);
-
         thisDoc.update(
             { meGusta: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)}
         )
@@ -56,16 +56,31 @@ export default class Posteos extends Component {
             )
         .catch(error => console.log('Upss error encontrado '+error))
     }
-    comentar(){
+    mostrarModal(){
        this.setState({
            showModal: true
        })
     }
-    descomentar(){
+    desmostrarModal(){
         this.setState({
             showModal: false
         })
     }
+    comentar(){        
+        let thisDoc = db.collection('posts').doc(this.props.doc.id);
+
+        thisDoc.update(
+            { comments: firebase.firestore.FieldValue.arrayUnion(this.state.comentario)}
+        )
+        .then(
+            this.setState({
+                comentario:''
+            },
+            console.log('comentario ok'))
+            )
+        .catch(e => console.log(e))
+    }
+
 
 
 
@@ -87,13 +102,20 @@ export default class Posteos extends Component {
                     }
                     <Text>Likes: {this.state.meGusta}</Text>
                 
-                <TouchableOpacity style={styles.insta} onPress={()=>this.comentar()}>
-                
+                <TouchableOpacity style={styles.insta} onPress={()=>this.mostrarModal()}>
+                Comentate
                 {this.state.showModal ?
                 <Modal visible={this.state.showModal}
                 animationType= 'fade'
                 transparent={false}>
-                <TouchableOpacity style={styles.insta} onPress={()=>this.descomentar()}> </TouchableOpacity>
+                    <TextInput
+                    style={styles.TextInput}
+                    onChangeText={(text)=>this.setState({comentario: text})}
+                    placeholder='Que bien te ves pana rabbit...'
+                    keyboardType='text'
+                    />
+                    <TouchableOpacity style={styles.insta} onPress={()=>this.comentar()}> Comentar</TouchableOpacity>
+                    <TouchableOpacity style={styles.insta} onPress={()=>this.desmostrarModal()}> Cerrar</TouchableOpacity>
                 </Modal>:
                 <Text></Text>
                 }

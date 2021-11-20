@@ -9,7 +9,6 @@ class CrearPost extends Component{
     constructor(props){
         super(props)
         this.state = {
-            title: "",
             description: "",
             mostrarCamara: true,    //Creo este estado para verificar si tengo acceso o no a la camara, para mostrarla al usuario
             foto: ''     //Este estado lo creo para guardar la foto en el storage de Firebase 
@@ -18,7 +17,6 @@ class CrearPost extends Component{
     createPost(){
         db.collection("posts").add({
           username: auth.currentUser.displayName,
-          title: this.state.title,
           description: this.state.description,
           createdAt: Date.now(),
           likes:[],            //Para lograr controlar los Likes
@@ -27,7 +25,6 @@ class CrearPost extends Component{
         })
         .then(response => {
           this.setState({
-            title: "",
             description: "",
           });
           this.props.drawerProps.navigation.navigate("Home");
@@ -35,11 +32,14 @@ class CrearPost extends Component{
         .catch(error => {
           console.log(error)
         })
+        this.setState({
+          mostrarCamara: true    
+        })
       }
       subirFoto(url){
         this.setState({
           foto: url,
-          mostrarCamara: false      
+          mostrarCamara: false    
         })
       }
       render(){
@@ -52,12 +52,6 @@ class CrearPost extends Component{
             <React.Fragment>
               <View style={styles.container}>
               <Text style={styles.titulo}>Registro de Posteos</Text>
-              <Text>Título</Text>
-              <TextInput 
-                  style={styles.input}
-                  onChangeText={text => this.setState({title: text})}
-              />
-    
               <Text>Descripción</Text>
               <TextInput 
                   style={styles.input}

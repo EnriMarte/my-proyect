@@ -4,7 +4,7 @@ import { auth, db } from "../firebase/config";
 import firebase from "firebase";
 
 
-export default class Posteos extends Component {
+export default class Perfil extends Component {
     constructor(props){
         super(props);
         this.state = {

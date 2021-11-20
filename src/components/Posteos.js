@@ -104,7 +104,6 @@ export default class Posteos extends Component {
             <View style={styles.card}>
             <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
                 <Text style={styles.name}>{this.props.doc.data.username}</Text>
-                <Text style={styles.desc}>Título:  {this.props.doc.data.title}</Text>
                 <Text style={styles.desc}>Descripción:  {this.props.doc.data.description}</Text>
                     { this.state.meGustaron === true ?
                         <TouchableOpacity  style={styles.quitarLike} onPress={()=>this.unLike()}>
@@ -115,7 +114,7 @@ export default class Posteos extends Component {
                         </TouchableOpacity>
                     }
                     <Text>Likes: {this.state.meGusta}</Text>
-                
+                    <Text>Cantidad de comentarios: {this.props.doc.data.comments.length} </Text>
                 <TouchableOpacity style={styles.insta} onPress={()=>this.mostrarModal()}>
                 Comentate
                 {this.state.showModal ?
@@ -123,7 +122,7 @@ export default class Posteos extends Component {
                 animationType= 'fade'
                 transparent={false}>
                     {this.props.doc.data.comments.length == 0 ?
-                    <Text>Aun no hay comentarios</Text>:
+                    <Text>Aun no hay comentarios, sé el primero en comentar</Text>:
                     null
                     }
                      <FlatList
@@ -137,7 +136,12 @@ export default class Posteos extends Component {
                     keyboardType='text'
                     value={this.state.comentario}
                     />
-                    <TouchableOpacity style={styles.insta} onPress={()=>this.comentar()}> Comentar</TouchableOpacity>
+                    <TouchableOpacity 
+                        style={!(this.state.comentario )?
+                            styles.disLoginBtn:
+                            styles.loginBtn}
+                        disabled= {!(this.state.comentario )} 
+                        onPress={()=>this.comentar()}> Comentar</TouchableOpacity>
                     <TouchableOpacity style={styles.insta} onPress={()=>this.desmostrarModal()}> Cerrar</TouchableOpacity>
                 </Modal>:
                 <Text></Text>
@@ -235,5 +239,23 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 20,
     alignItems: "center",
+  },
+  loginBtn: {
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: "#89653A",
+  },
+  disLoginBtn: {
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: "grey",
   },
 })

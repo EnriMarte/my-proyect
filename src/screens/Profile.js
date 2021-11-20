@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {View, Text, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
 import Posteos from '../components/Posteos'
-import {db} from "../firebase/config";
+import {db, auth} from "../firebase/config";
 
 
 export default class Profile extends Component{
@@ -43,12 +43,13 @@ export default class Profile extends Component{
         return(
             <View style={styles.container}>
                 <Text>{this.props.nombre}</Text>
+                <Text>{auth.currentUser.metadata.lastSignInTime} </Text>
 
                 <TouchableOpacity style={styles.quitarLike}
                     onPress={() => this.props.signOut()}
                 >
-                    <Image style={styles.image} source={{uri: "https://www.kindpng.com/picc/m/19-194798_transparent-logout-png-sign-out-icon-transparent-png.png",}}/> 
-                    {/* <Text>Cerrar Sesion</Text> */}
+                    <Image style={styles.image} source={{uri: "https://cdn-icons-png.flaticon.com/512/126/126467.png",}}/> 
+                <Text>Cerrar Sesion</Text> 
                 </TouchableOpacity>
                 <FlatList style={styles.card}
                     data={this.state.posteosUser}
@@ -68,8 +69,9 @@ const styles = StyleSheet.create({
         padding: '4%',
       },
       image: {
-        width: '100%',
-        height: '80%',
+        width: '34%',
+        height: '38%',
+        marginLeft: '34%',
     },
     quitarLike: {
         backgroundColor: 'white',

@@ -10,8 +10,8 @@ class CrearPost extends Component{
         super(props)
         this.state = {
             description: "",
-            mostrarCamara: true,    //Creo este estado para verificar si tengo acceso o no a la camara, para mostrarla al usuario
-            foto: ''     //Este estado lo creo para guardar la foto en el storage de Firebase 
+            mostrarCamara: true,   
+            foto: ''
           }
     }
     createPost(){
@@ -19,9 +19,9 @@ class CrearPost extends Component{
           username: auth.currentUser.displayName,
           description: this.state.description,
           createdAt: Date.now(),
-          likes:[],            //Para lograr controlar los Likes
-          comments:[],        //Para lograr almacenar los comentarios
-          foto: this.state.foto            //Para lograr almacenar la foto y luego poder mostrarla donde desee
+          meGusta:[],            
+          comments:[], 
+          foto: this.state.foto          
         })
         .then(response => {
           this.setState({
@@ -75,7 +75,6 @@ class CrearPost extends Component{
         )
       }
     }
-    //Aquí es donde le aplico los estilos
     const styles = StyleSheet.create({
       container: {
           flex: 1,

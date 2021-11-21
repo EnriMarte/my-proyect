@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {View, StyleSheet, TextInput, FlatList, TouchableOpacity, ActivityIndicator, Image} from 'react-native'
-import Perfil from '../components/Perfil'
+import {View, StyleSheet, TextInput, FlatList, Text} from 'react-native'
 import { db} from "../firebase/config";
+import Posteos from "../components/Posteos";
 
 
 export default class Home extends Component{
@@ -21,16 +21,11 @@ export default class Home extends Component{
                     data: doc.data()
                 }) 
             })
-            console.log(perfil);
             this.setState({
                 perfiles: perfil,    
                 carga: false   
             })
         })
-    }
-    mostrarPerfiles(perfiles){
-        perfiles = this.state.perfiles
-
     }
     render(){
         return(
@@ -38,19 +33,16 @@ export default class Home extends Component{
                  <TextInput
                     style={styles.TextInput}
                     onChangeText={(text)=>{
-                        this.setState({
-                            errorint: ''
-                        })
-                        
+                        this.search(text)
                     }}
                     placeholder='Ingrese nombre de usuario'
                 />
                 <View>
-                        <FlatList
-                            data={this.state.perfiles}
-                            renderItem={ ({item})=><Perfil doc={item}/>}
-                        />
-                    </View>
+                    <FlatList
+                        data={this.state.perfiles}
+                        renderItem={ ({item})=><Posteos doc={item}/>}
+                    />    
+                </View>
             </View>
         )
     }

@@ -88,9 +88,13 @@ class MiCamara extends Component{
                         />
                     </React.Fragment>    
                 }
+                {!this.state.foto ?
                     <TouchableOpacity style={styles.insta} onPress= { () => this.sacarFoto()}>            
-                            <Text >Sacar Foto</Text>
-                    </TouchableOpacity>
+                        <Text >Sacar Foto</Text>
+                    </TouchableOpacity>:
+                    null
+                }
+                    
                 
 
             </React.Fragment>

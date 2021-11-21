@@ -55,7 +55,7 @@ export default class AuthDrawer extends Component{
         })
         .catch(error => {
             this.setState({
-                error: "Datos incorrectos",
+                error: "Por favor, modifique su contraseña o ingrese un mail correcto",
                 logIn: false
             })
         })

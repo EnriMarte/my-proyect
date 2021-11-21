@@ -154,7 +154,7 @@ export default class Posteos extends Component {
                         animationType= 'fade'
                         transparent={false}>
             
-                        <TouchableOpacity style={styles.meGusta} onPress={() => this.props.borrar(this.props.doc.id)}>
+                        <TouchableOpacity style={styles.disLoginBtn} onPress={() => this.props.borrar(this.props.doc.id)}>
                             <Text>Borrar</Text>
                         </TouchableOpacity>   
                             <TouchableOpacity style={styles.insta} onPress={()=>this.desmostrarModalDelete()}> Cerrar</TouchableOpacity>               

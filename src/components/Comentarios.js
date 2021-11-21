@@ -16,8 +16,7 @@ export default class Comentarios extends Component {
         return(
             
             <View style={styles.card}>
-                <Text style={styles.name}>{this.props.doc.comentario}</Text>
-                <Text style={styles.name}>{this.props.doc.creador}</Text>
+                <Text style={styles.comentarios}> {this.props.doc.creador}: {this.props.doc.comentario}  </Text>
             </View>
                 
         )
@@ -69,4 +68,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 8,
   },
+  comentarios: {
+    fontSize: 18,
+    fontWeight: 'normal'
+  }
 })

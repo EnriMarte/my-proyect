@@ -42,8 +42,9 @@ export default class Profile extends Component{
     render(){
         return(
             <View style={styles.container}>
-                <Text>{this.props.nombre}</Text>
+                
                 <Text>{auth.currentUser.metadata.lastSignInTime} </Text>
+                <Text>{this.props.nombre}</Text>
 
                 <TouchableOpacity style={styles.quitarLike}
                     onPress={() => this.props.signOut()}
@@ -51,7 +52,7 @@ export default class Profile extends Component{
                     <Image style={styles.image} source={{uri: "https://cdn-icons-png.flaticon.com/512/126/126467.png",}}/> 
                 <Text>Cerrar Sesion</Text> 
                 </TouchableOpacity>
-                <FlatList style={styles.card}
+                <FlatList 
                     data={this.state.posteosUser}
                     renderItem={ ({item})=><Posteos doc={item} borrar={(id) => this.borrarPost(id)}/>}
                 />

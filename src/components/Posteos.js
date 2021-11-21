@@ -121,15 +121,16 @@ export default class Posteos extends Component {
                 animationType= 'fade'
                 transparent={false}>
                     {this.props.doc.data.comments.length == 0 ?
-                    <Text>Aun no hay comentarios, sé el primero en comentar</Text>:
+                    <Text style={styles.coment} >Aun no hay comentarios, sé el primero en comentar</Text>:
                     null
                     }
-                     <FlatList
+                     <FlatList 
+                            style={styles.flat}
                             data={this.props.doc.data.comments}
                             renderItem={ ({item})=><Comentarios doc={item}/>}
                     />
                     <TextInput
-                    style={styles.TextInput}
+                    style={styles.estilo}
                     onChangeText={(text)=>this.setState({comentario: text})}
                     placeholder='Que bien te ves pana rabbit...'
                     keyboardType='text'
@@ -171,20 +172,35 @@ export default class Posteos extends Component {
 const styles = StyleSheet.create({
     quitarLike: {
     backgroundColor: 'white',
-    height: '80px',
+    height: '48px',
     marginLeft: '69%',
     marginRight: '5%',
     opacity: '50%',
   },
+  flat: {
+    padding: '2%',
+    marginLeft: '4%',
+    marginRight: '4%'
+  },
+  coment: {
+      padding: '4%'
+  },
+  estilo: {
+      marginLeft: '10%',
+      marginRight: '10%',
+      borderColor: 'black',
+      borderWidth: 'thin',
+      padding: '2%'
+  },
   meGusta: {
     backgroundColor: 'white',
-    height: '80px',
+    height: '48px',
     marginLeft: '69%',
     marginRight: '5%',
   },
   image: {
       width: '54%',
-      height: '60%',
+      height: '98%',
       marginLeft: '40%',
   },
   texto:{
@@ -223,27 +239,32 @@ const styles = StyleSheet.create({
   insta: {
     backgroundColor: "#78CB43",
     borderRadius: 30,
-    width: "70%",
-    height: 45,
+    width: "30%",
+    height: 36,
     marginBottom: 20,
     alignItems: "center",
+    marginTop: '4%',
+    padding: '2%',
+    marginLeft: '35%'
   },
   loginBtn: {
-    width: "80%",
+    width: "88%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
     backgroundColor: "#89653A",
+    marginLeft: '6%'
   },
   disLoginBtn: {
-    width: "80%",
+    width: "88%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
     backgroundColor: "grey",
+    marginLeft: '6%'
   },
 })

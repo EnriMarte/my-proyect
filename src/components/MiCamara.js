@@ -88,14 +88,8 @@ class MiCamara extends Component{
                         />
                     </React.Fragment>    
                 }
-                    <TouchableOpacity style={styles.btnn} onPress= { () => this.sacarFoto()}>
-                        <LinearGradient
-                    colors={['#7E4B2A', '#78CB43']}
-                    start={{x: 0, y: 0.5}}
-                    end={{x: 1, y: 1}}
-                        >                        
+                    <TouchableOpacity style={styles.insta} onPress= { () => this.sacarFoto()}>            
                             <Text >Sacar Foto</Text>
-                        </LinearGradient>
                     </TouchableOpacity>
                 
 
@@ -117,6 +111,16 @@ const styles = StyleSheet.create({
         color: 'white',
         justifyContent: "center",
     },
+    insta: {
+        backgroundColor: "#78CB43",
+        width: "88%",
+        borderRadius: 25,
+        height: 46,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 34,
+        marginLeft: '6%'
+      },
     btnn: {
         padding: '6%'
     },
@@ -127,18 +131,24 @@ const styles = StyleSheet.create({
     btnRechazar:{
         flex: 1,     
         width: '30%',
-        backgroundColor: 'teal',
+        backgroundColor: "#89653A",
         color: 'white',
         marginTop: '2%',
-        marginLeft: '5%'
+        marginLeft: '20%',
+        textAlign: 'center',
+        width: '60%',
+        padding: '2%',
     },
     btnAceptar:{
         flex: 1,     
         width: '30%',
-        backgroundColor: 'tomato',
+        backgroundColor: "#78CB43",
         color: 'white',
         marginTop: '2%',
-        marginLeft: '5%'
+        marginLeft: '20%',
+        textAlign: 'center',
+        width: '60%',
+        padding: '2%',
     },
     mensaje:{
         backgroundColor: 'tomato',

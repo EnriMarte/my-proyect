@@ -105,7 +105,7 @@ export default class AuthDrawer extends Component{
                     {
                         this.state.logIn ?
                             <React.Fragment>
-                                <Drawer.Screen name="Home">
+                                <Drawer.Screen name="Inicio">
                                     {() => <Home />}
                                 </Drawer.Screen>
                                 <Drawer.Screen name="Perfil">
@@ -116,20 +116,20 @@ export default class AuthDrawer extends Component{
                                 <Drawer.Screen name="Postear">
                                 {(drawerProps) => <CrearPost drawerProps={drawerProps}/>}
                                 </Drawer.Screen>
-                                <Drawer.Screen name="Search">
+                                <Drawer.Screen name="Buscador">
                                     {() => <Search />}
                                 </Drawer.Screen>
                             </React.Fragment>
                         :
                             <React.Fragment>
-                                <Drawer.Screen name="Login">
+                                <Drawer.Screen name="Iniciar sesión">
                                     {() => <Login ingresar = {
                                     (email, password)=> this.ingresar(email, password)} 
                                     error = {this.state.error} 
                                     onInputChange={() => this.onInputChange()}
                                     />}
                                 </Drawer.Screen>
-                                <Drawer.Screen name="Register">
+                                <Drawer.Screen name="Registrarse">
                                     {() => <Register registrar = {
                                     (email, password, username)=> this.registrarse(email, password, username)} 
                                     error = {this.state.error}

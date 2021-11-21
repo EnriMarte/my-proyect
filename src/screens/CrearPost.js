@@ -51,8 +51,7 @@ class CrearPost extends Component{
             :
             <React.Fragment>
               <View style={styles.container}>
-              <Text style={styles.titulo}>Registro de Posteos</Text>
-              <Text>Descripción</Text>
+              <Text style={styles.titulo}>!Subí tu foto!</Text>
               <TextInput 
                   style={styles.input}
                   multiline = {true}
@@ -61,7 +60,7 @@ class CrearPost extends Component{
               />
     
               <TouchableOpacity
-                  style={styles.btn}
+                  style={styles.insta}
                   onPress={() => this.createPost()}
               >
                   <Text>Crear Post</Text>
@@ -87,24 +86,32 @@ class CrearPost extends Component{
       titulo:{
         fontFamily: 'arial',
         textAlign: 'center',
-        color: 'tomato',
+        color: '#89653A',
         fontSize: '2rem'
       },
       input: {
         height: 20,
-        paddingVertical: 15,
-        paddingHorizontal: 10,
+        paddingBottom: 25,
+        paddingTop: 25,
+        paddingLeft: 10,
+        paddingRight: 60,
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#ccc',
         borderRadius: 6,
         marginVertical:10
+
       },
-    
-      btn: {
-          backgroundColor: 'teal',
-          padding: 10,
-          color: 'white'
+      insta: {
+        backgroundColor: "#78CB43",
+        borderRadius: 30,
+        width: "30%",
+        height: 36,
+        marginBottom: 20,
+        alignItems: "center",
+        marginTop: '4%',
+        padding: '2%',
+        marginLeft: '0%'
       },
       error: {
           color: 'tomato'

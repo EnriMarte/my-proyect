@@ -17,7 +17,6 @@ class Register extends Component{
         return(
             <View style={styles.container}>
                 <Image style={styles.image} source={{uri: "https://i.ibb.co/QFt66f1/carbon.png",}}/> 
-                <Text style={styles.registrar} >Register</Text>
                 <Text style={styles.error}>{this.props.error}</Text>
                 <Text style={styles.error}>{this.state.errorint}</Text>
                 <View style={styles.input}>

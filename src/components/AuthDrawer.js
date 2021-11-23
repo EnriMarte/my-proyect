@@ -20,7 +20,7 @@ export default class AuthDrawer extends Component{
             logIn : false,
             email: '',
             user: '',
-            error: ''
+            banana: ''
             }
     }
 
@@ -42,8 +42,6 @@ export default class AuthDrawer extends Component{
     registrarse(email, password, username){
         auth.createUserWithEmailAndPassword(email, password)
         .then(response => {
-            console.log(username);
-            console.log(response);
             response.user.updateProfile({
                 displayName: username
             })
@@ -55,7 +53,7 @@ export default class AuthDrawer extends Component{
         })
         .catch(error => {
             this.setState({
-                error: "Por favor, modifique su contraseña o ingrese un mail correcto",
+                banana: "Por favor, modifique su contraseña o ingrese un mail correcto",
                 logIn: false
             })
         })
@@ -64,23 +62,21 @@ export default class AuthDrawer extends Component{
             auth.signInWithEmailAndPassword(email, password)
             .then(response => {
                 console.log(response);
-
                 this.setState({
                     logIn: true,
                     user: response.user.displayName
                 })
-                console.log('s'+user);
             })
             .catch(error => {
                 this.setState({
                     logIn: false,
-                    error: "Credenciales incorrectas"
+                    banana: "Credenciales incorrectas"
                 })
             })
     }
     onInputChange(){
         this.setState({
-            error: ''
+            banana: ''
         })
     }
     signOut(){
@@ -89,7 +85,7 @@ export default class AuthDrawer extends Component{
             this.setState({
                 logIn: false,
                 user: '',
-                error: ''
+                banana: ''
             });
         })
         .catch(error => {
@@ -123,16 +119,16 @@ export default class AuthDrawer extends Component{
                         :
                             <React.Fragment>
                                 <Drawer.Screen name="Iniciar sesión">
-                                    {() => <Login ingresar = {
-                                    (email, password)=> this.ingresar(email, password)} 
-                                    error = {this.state.error} 
-                                    onInputChange={() => this.onInputChange()}
+                                    {() => <Login 
+                                    ingresar = {(email, password)=> this.ingresar(email, password)} 
+                                    error = {this.state.banana} 
+                                    errordeLogin={() => this.onInputChange()}
                                     />}
                                 </Drawer.Screen>
                                 <Drawer.Screen name="Registrarse">
-                                    {() => <Register registrar = {
-                                    (email, password, username)=> this.registrarse(email, password, username)} 
-                                    error = {this.state.error}
+                                    {() => <Register 
+                                    registrar = {(email, password, username)=> this.registrarse(email, password, username)} 
+                                    error = {this.state.banana}
                                     onInputChange={() => this.onInputChange()}
                                     />}
                                 </Drawer.Screen>

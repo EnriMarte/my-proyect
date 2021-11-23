@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity,FloatList, Image, ActivityIndicator } from 'react-native';
+import {Text, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import {Camera} from 'expo-camera';
 import { storage } from '../firebase/config'; 
-import { LinearGradient } from 'expo-linear-gradient';
 
 
 class MiCamara extends Component{

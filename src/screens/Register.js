@@ -7,9 +7,7 @@ class Register extends Component{
         this.state={
             email:'',
             userName:'',
-            password:'',
-            errorint: ''
-        }
+            password:'',        }
     }
 
 
@@ -18,11 +16,12 @@ class Register extends Component{
             <View style={styles.container}>
                 <Image style={styles.image} source={{uri: "https://i.ibb.co/QFt66f1/carbon.png",}}/> 
                 <Text style={styles.error}>{this.props.error}</Text>
-                <Text style={styles.error}>{this.state.errorint}</Text>
                 <View style={styles.input}>
                 <TextInput
                     style={styles.TextInput}
-                    onChangeText={(text)=>this.setState({email: text})}
+                    onChangeText={(text)=>{
+                        this.props.onInputChange()
+                        this.setState({email: text})}}
                     placeholder='Email'
                     keyboardType='email-address'
                     />
@@ -30,7 +29,11 @@ class Register extends Component{
                 <View style={styles.input}>
                 <TextInput
                     style={styles.TextInput}
-                    onChangeText={(text)=>this.setState({password: text})}
+                    onChangeText={(text)=>{
+                        this.props.onInputChange()
+                        this.setState({password: text})
+                    }
+                }
                     placeholder='Password'
                     keyboardType='default'
                     secureTextEntry={true}
@@ -41,7 +44,10 @@ class Register extends Component{
                     style ={styles.TextInput}
                     placeholder = 'Introduzca su nombre'
                     keyboardType = 'default'
-                    onChangeText = { (text) => this.setState({userName: text})} 
+                    onChangeText = { (text) => {
+                        this.props.onInputChange()
+                        this.setState({userName: text})}
+                } 
                 />
                 </View>
                 <TouchableOpacity 
@@ -51,14 +57,7 @@ class Register extends Component{
                         styles.loginBtn}
                     disabled= {!(this.state.email && this.state.password && this.state.userName)} 
                     onPress={()=>{
-                        
-                        if(this.state.email && this.state.password && this.state.userName){
                             this.props.registrar(this.state.email, this.state.password, this.state.userName)
-                        }else{
-                            this.setState({
-                                errorint: 'Porfavor completa los datos'
-                            })
-                        }
                     }
                     }>
                     <Text style={styles.textButton}>Registrarse</Text>    

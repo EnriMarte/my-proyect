@@ -5,7 +5,8 @@ export default class Login extends Component{
     constructor(props){
         super(props)
         this.state={
-            errorint: ''
+            email: '',
+            password: ''
         }
 
     }
@@ -14,15 +15,13 @@ export default class Login extends Component{
             <View style={styles.container}>
                 <Image style={styles.image} source={{uri: "https://i.ibb.co/JK3Wb2f/Kiwi.png",}}/> 
                 <Text style={styles.error}>{this.props.error}</Text>
-                <Text style={styles.error}>{this.state.errorint}</Text>
             <View style={styles.input}>
 
                 <TextInput
                     style={styles.TextInput}
                     onChangeText={(text)=>{
-                        this.props.onInputChange()
+                        this.props.errordeLogin()
                         this.setState({
-                            errorint: '',
                             email: text
                         })
                     }}
@@ -34,9 +33,8 @@ export default class Login extends Component{
                 <TextInput
                     style={styles.TextInput}
                     onChangeText={(text)=>{
-                        this.props.onInputChange()
+                        this.props.errordeLogin()
                         this.setState({
-                            errorint: '',
                             password: text
                         })
                     }}
@@ -46,19 +44,12 @@ export default class Login extends Component{
                 />
             </View>
                 <TouchableOpacity 
-                    
                     style={!(this.state.email && this.state.password)?
                         styles.disLoginBtn:
                         styles.loginBtn}
                     disabled= {!(this.state.email && this.state.password)} 
                     onPress={()=>{
-                        if(this.state.email && this.state.password){
                             this.props.ingresar(this.state.email, this.state.password)
-                        }else{
-                            this.setState({
-                                errorint: 'Porfavor completa los datos'
-                            })
-                        }
                     }
                 }>    
                 <Text>

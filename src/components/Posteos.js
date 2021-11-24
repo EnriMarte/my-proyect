@@ -103,7 +103,7 @@ export default class Posteos extends Component {
             <View style={styles.card}>
             <Image style={styles.thumb} source= {this.props.doc.data.foto}/>
                 <Text style={styles.name}>{this.props.doc.data.username}</Text>
-                <Text style={styles.desc}>Descripción:  {this.props.doc.data.description}</Text>
+                <Text style={styles.desc}>{this.props.doc.data.description}</Text>
                     { this.state.meGustaron === true ?
                         <TouchableOpacity  style={styles.quitarLike} onPress={()=>this.unLike()}>
                         <Image style={styles.image} source={{uri: "https://i.postimg.cc/y6gnWK7m/logon.png",}}/> 
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   desc: {
-        fontSize: 22,
+        fontSize: 18,
   },
   insta: {
     backgroundColor: "#78CB43",

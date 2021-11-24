@@ -1,5 +1,5 @@
 import React, {Component} from 'React'
-import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native'
+import {View, StyleSheet, Text, FlatList, TouchableOpacity, ActivityIndicator, Image} from 'react-native'
 import Posteos from '../components/Posteos'
 import { db} from "../firebase/config";
 

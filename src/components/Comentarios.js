@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet} from 'react-native';
 
-
-
 export default class Comentarios extends Component {
     constructor(props){
         super(props);
@@ -12,7 +10,7 @@ export default class Comentarios extends Component {
         return(
             
             <View style={styles.card}>
-                <Text style={styles.comentarios}> {this.props.doc.creador}: {this.props.doc.comentario}  </Text>
+                <Text style={styles.comentarios}> {this.props.doc.creador}: {this.props.doc.comentario} </Text>
             </View>
                 
         )
